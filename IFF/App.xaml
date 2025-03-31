@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:IFF.Converters"
+             x:Class="IFF.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converters:BooleanToColorConverter x:Key="BooleanToColorConverter"/>
+            <converters:StringNotEmptyConverter x:Key="StringNotEmptyConverter"/>
+            <converters:UsernameStatusColorConverter x:Key="UsernameStatusColorConverter"/>
+            <converters:MonthNameConverter x:Key="MonthNameConverter"/>
+
+            <!-- Основні кольори програми -->
+            <Color x:Key="BackgroundColor">#102B3E</Color>
+            <!-- Фон сторінок -->
+            <Color x:Key="FieldBackgroundColor">#CED8E1</Color>
+            <!-- Фон полів введення -->
+            <Color x:Key="FieldTextColor">#102B3E</Color>
+            <!-- Колір тексту в полях -->
+            <Color x:Key="PlaceholderColor">#4F4C63</Color>
+            <!-- Колір підказок у полях -->
+            <Color x:Key="ButtonBackgroundColor">#1CC8A0</Color>
+            <!-- Фон кнопок -->
+            <Color x:Key="ButtonTextColor">#102B3E</Color>
+            <!-- Колір тексту кнопок -->
+            <Color x:Key="TextColor">#CED8E1</Color>
+            <!-- Колір основного тексту -->
+            <Color x:Key="BorderColor">#1CC8A1</Color>
+            <!-- Колір рамок -->
+            <Color x:Key="AccentColor">#1CC8A0</Color>
+            <!-- Акцентний колір (чекбокси, вибрані вкладки) -->
+            <Color x:Key="TabBarBackgroundColor">#102B3E</Color>
+            <!-- Фон панелі вкладок -->
+            <Color x:Key="TabUnselectedColor">#4F4C63</Color>
+            <!-- Колір неактивних вкладок -->
+            <Color x:Key="TabSelectedColor">#1CC8A0</Color>
+            <!-- Колір активних вкладок -->
+
+            <!-- Стилі для елементів -->
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+            </Style>
+            <Style TargetType="TabbedPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource TabBarBackgroundColor}"/>
+                <Setter Property="BarTextColor" Value="{StaticResource TextColor}"/>
+                <Setter Property="UnselectedTabColor" Value="{StaticResource TabUnselectedColor}"/>
+                <Setter Property="SelectedTabColor" Value="{StaticResource TabSelectedColor}"/>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{StaticResource FieldBackgroundColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource FieldTextColor}"/>
+                <Setter Property="PlaceholderColor" Value="{StaticResource PlaceholderColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            <Style TargetType="Editor">
+                <Setter Property="BackgroundColor" Value="{StaticResource FieldBackgroundColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource FieldTextColor}"/>
+                <Setter Property="PlaceholderColor" Value="{StaticResource PlaceholderColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="BackgroundColor" Value="{StaticResource FieldBackgroundColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource FieldTextColor}"/>
+                <Setter Property="TitleColor" Value="{StaticResource PlaceholderColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackgroundColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="Padding" Value="14,10"/>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="BorderColor" Value="{StaticResource BorderColor}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+                <Setter Property="CornerRadius" Value="8"/>
+            </Style>
+            <Style TargetType="CheckBox">
+                <Setter Property="Color" Value="{StaticResource AccentColor}"/>
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="BackgroundColor" Value="{StaticResource FieldBackgroundColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource FieldTextColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

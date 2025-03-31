@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IFF.Views.RegisterPage"
+             Title="Реєстрація">
+    <ScrollView>
+        <StackLayout Padding="20" VerticalOptions="Center">
+            <Entry Placeholder="ПІБ" Text="{Binding FullName}"/>
+            <Entry Placeholder="Логін" Text="{Binding Username}"/>
+            <Label Text="{Binding UsernameStatus}" TextColor="{Binding UsernameStatus, Converter={StaticResource UsernameStatusColorConverter}}"/>
+            <Entry Placeholder="Пароль" Text="{Binding Password}" IsPassword="True"/>
+            <StackLayout>
+                <Label Text="Вимоги до пароля" FontSize="Medium" FontAttributes="Bold" Margin="0,10,0,5"/>
+                <Label Text="Довжина більше 6 символів" TextColor="{Binding IsLengthValid, Converter={StaticResource BooleanToColorConverter}, ConverterParameter='#4F4C63|#00FF00', FallbackValue='#4F4C63'}"/>
+                <Label Text="Лише латинські літери, цифри, спецсимволи" TextColor="{Binding IsLatinOnly, Converter={StaticResource BooleanToColorConverter}, ConverterParameter='#4F4C63|#00FF00', FallbackValue='#4F4C63'}"/>
+                <Label Text="Має містити хоча б одну цифру" TextColor="{Binding HasDigit, Converter={StaticResource BooleanToColorConverter}, ConverterParameter='#4F4C63|#00FF00', FallbackValue='#4F4C63'}"/>
+                <Label Text="Має містити хоча б один спецсимвол" TextColor="{Binding HasSpecialChar, Converter={StaticResource BooleanToColorConverter}, ConverterParameter='#4F4C63|#00FF00', FallbackValue='#4F4C63'}"/>
+            </StackLayout>
+            <Entry Placeholder="Підтвердіть пароль" Text="{Binding ConfirmPassword}" IsPassword="True"/>
+            <Label Text="Паролі не співпадають" TextColor="Red" IsVisible="{Binding PasswordsMatch, Converter={StaticResource InverseBoolConverter}}"/>
+            <StackLayout Orientation="Horizontal" Margin="0,10">
+                <CheckBox IsChecked="{Binding IsTermsAccepted, Mode=TwoWay}"/>
+                <Label Text="Я погоджуюсь з ">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="правилами користування та умовною згодою користувача" TextColor="#1CC8A0" FontAttributes="Bold">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowTermsCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <Label Text="{Binding ErrorMessage}" TextColor="Red" HorizontalOptions="Center"/>
+            <Button Text="Зареєструватись" Command="{Binding RegisterCommand}"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Вже маєте акаунт? " TextColor="{StaticResource TextColor}"/>
+                <Label Text="Увійти" TextColor="#1CC8A0" FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToLoginCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

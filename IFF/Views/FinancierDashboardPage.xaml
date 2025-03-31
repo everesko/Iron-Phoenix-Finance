@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="IFF.Views.FinancierDashboardPage"
+            NavigationPage.HasNavigationBar="False">
+    <!-- Вкладка "Нарахування" -->
+    <ContentPage Title="Нарахування">
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Label Text="Нарахування працівникам" FontSize="Large" HorizontalOptions="Center"/>
+                <Label Text="{Binding SelectedUser.FullName, StringFormat='Обраний працівник: {0}'}" FontSize="Medium" HorizontalOptions="Center"/>
+                <Picker ItemsSource="{Binding Users}" ItemDisplayBinding="{Binding FullName}" SelectedItem="{Binding SelectedUser}"/>
+                <Grid ColumnDefinitions="Auto,*">
+                    <Label Text="Рік:" Grid.Column="0" VerticalOptions="Center" FontSize="Medium" Margin="0,0,10,0"/>
+                    <Picker Grid.Column="1" ItemsSource="{Binding AvailableYears}" SelectedItem="{Binding SelectedYear}" WidthRequest="150"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Місяць" Grid.Column="0" FontAttributes="Bold"/>
+                    <Label Text="Дата" Grid.Column="1" FontAttributes="Bold"/>
+                    <Label Text="Нараховано" Grid.Column="2" FontAttributes="Bold"/>
+                    <Label Text="ПДФО" Grid.Column="3" FontAttributes="Bold"/>
+                    <Label Text="ПЗ" Grid.Column="4" FontAttributes="Bold"/>
+                    <Label Text="ВЗ" Grid.Column="5" FontAttributes="Bold"/>
+                    <Label Text="ФЗФ" Grid.Column="6" FontAttributes="Bold"/>
+                    <Label Text="Премія" Grid.Column="7" FontAttributes="Bold"/>
+                    <Label Text="Отримано" Grid.Column="8" FontAttributes="Bold"/>
+                    <Label Text="Дії" Grid.Column="9" FontAttributes="Bold"/>
+                </Grid>
+                <CollectionView ItemsSource="{Binding SalariesForSelectedUser}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding Month, Converter={StaticResource MonthNameConverter}}" Grid.Column="0"/>
+                                <Label Text="{Binding AccrualDate, StringFormat='{0:dd.MM.yyyy}'}" Grid.Column="1"/>
+                                <Label Text="{Binding Accrued, StringFormat='{0:F2}'}" Grid.Column="2"/>
+                                <Label Text="{Binding Pdfo, StringFormat='{0:F2}'}" Grid.Column="3"/>
+                                <Label Text="{Binding Pension, StringFormat='{0:F2}'}" Grid.Column="4"/>
+                                <Label Text="{Binding Military, StringFormat='{0:F2}'}" Grid.Column="5"/>
+                                <Label Text="{Binding ZfFund, StringFormat='{0:F2}'}" Grid.Column="6"/>
+                                <Label Text="{Binding Bonus, StringFormat='{0:F2}'}" Grid.Column="7"/>
+                                <Label Text="{Binding Received, StringFormat='{0:F2}'}" Grid.Column="8"/>
+                                <Button Text="Нарахувати" Command="{Binding Source={RelativeSource AncestorType={x:Type TabbedPage}}, Path=BindingContext.EditSalaryCommand}" CommandParameter="{Binding .}" Grid.Column="9" WidthRequest="90"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Label Text="{Binding TotalReceived, StringFormat='Всього отримано: {0:F2} грн'}" FontAttributes="Bold"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+                    <Button Text="Сформувати звіт" Command="{Binding GenerateReportCommand}" WidthRequest="180"/>
+                    <Button Text="Вийти" Command="{Binding LogoutCommand}" WidthRequest="100"/>
+                </StackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage>
+    <!-- Вкладка "Перегляд нарахувань" -->
+    <ContentPage Title="Перегляд нарахувань">
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Label Text="Перегляд ваших нарахувань" FontSize="Large" HorizontalOptions="Center"/>
+                <Label Text="{Binding FullName, StringFormat='Поточний користувач: {0}'}" FontSize="Medium" HorizontalOptions="Center"/>
+                <Grid ColumnDefinitions="Auto,*">
+                    <Label Text="Рік:" Grid.Column="0" VerticalOptions="Center" FontSize="Medium" Margin="0,0,10,0"/>
+                    <Picker Grid.Column="1" ItemsSource="{Binding AvailableYears}" SelectedItem="{Binding SelectedYear}" WidthRequest="150"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Місяць" Grid.Column="0" FontAttributes="Bold"/>
+                    <Label Text="Дата" Grid.Column="1" FontAttributes="Bold"/>
+                    <Label Text="Нараховано" Grid.Column="2" FontAttributes="Bold"/>
+                    <Label Text="ПДФО" Grid.Column="3" FontAttributes="Bold"/>
+                    <Label Text="ПЗ" Grid.Column="4" FontAttributes="Bold"/>
+                    <Label Text="ВЗ" Grid.Column="5" FontAttributes="Bold"/>
+                    <Label Text="ФЗФ" Grid.Column="6" FontAttributes="Bold"/>
+                    <Label Text="Премія" Grid.Column="7" FontAttributes="Bold"/>
+                    <Label Text="Отримано" Grid.Column="8" FontAttributes="Bold"/>
+                </Grid>
+                <CollectionView ItemsSource="{Binding SalariesForCurrentUser}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding Month, Converter={StaticResource MonthNameConverter}}" Grid.Column="0"/>
+                                <Label Text="{Binding AccrualDate, StringFormat='{0:dd.MM.yyyy}'}" Grid.Column="1"/>
+                                <Label Text="{Binding Accrued, StringFormat='{0:F2}'}" Grid.Column="2"/>
+                                <Label Text="{Binding Pdfo, StringFormat='{0:F2}'}" Grid.Column="3"/>
+                                <Label Text="{Binding Pension, StringFormat='{0:F2}'}" Grid.Column="4"/>
+                                <Label Text="{Binding Military, StringFormat='{0:F2}'}" Grid.Column="5"/>
+                                <Label Text="{Binding ZfFund, StringFormat='{0:F2}'}" Grid.Column="6"/>
+                                <Label Text="{Binding Bonus, StringFormat='{0:F2}'}" Grid.Column="7"/>
+                                <Label Text="{Binding Received, StringFormat='{0:F2}'}" Grid.Column="8"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+                    <Button Text="Сформувати звіт" Command="{Binding GenerateReportCommand}" WidthRequest="180"/>
+                    <Button Text="Вийти" Command="{Binding LogoutCommand}" WidthRequest="100"/>
+                </StackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage>
+    <!-- Вкладка "Зв'язок" -->
+    <ContentPage Title="Зв'язок">
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Label Text="Опишіть проблему" FontSize="Large" HorizontalOptions="Center"/>
+                <Editor Text="{Binding ComplaintText}" HeightRequest="150"/>
+                <Button Text="Надіслати скаргу" Command="{Binding SubmitComplaintCommand}" WidthRequest="150" HorizontalOptions="Center"/>
+                <Button Text="Вийти" Command="{Binding LogoutCommand}" WidthRequest="100" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage>
+</TabbedPage>

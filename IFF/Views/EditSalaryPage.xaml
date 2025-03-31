@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IFF.Views.EditSalaryPage"
+             Title="Редагування зарплати">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Редагування нарахувань" FontSize="Large" HorizontalOptions="Center"/>
+            <Label Text="Дата нарахування" FontSize="Medium"/>
+            <DatePicker Date="{Binding AccrualDate, Mode=TwoWay}"/>
+            <Label Text="{Binding FullName}" FontAttributes="Bold"/>
+            <Label Text="{Binding Role}"/>
+            <Label Text="Должностной оклад, грн"/>
+            <Entry Text="{Binding BaseSalary, Mode=TwoWay, StringFormat='{0:F2}'}" Keyboard="Numeric"/>
+            <Label Text="Кількість робочих днів (100%)"/>
+            <Entry Text="{Binding WorkDays, Mode=TwoWay}" Keyboard="Numeric"/>
+            <Label Text="Кількість відпускних/командировок (75%)"/>
+            <Entry Text="{Binding VacationDays, Mode=TwoWay}" Keyboard="Numeric"/>
+            <Label Text="Кількість лікарняних днів (50%)"/>
+            <Entry Text="{Binding SickDays, Mode=TwoWay}" Keyboard="Numeric"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="Нараховано" Grid.Column="0" FontAttributes="Bold"/>
+                <Label Text="ПДФО" Grid.Column="1" FontAttributes="Bold"/>
+                <Label Text="ПЗ" Grid.Column="2" FontAttributes="Bold"/>
+                <Label Text="ВЗ" Grid.Column="3" FontAttributes="Bold"/>
+                <Label Text="ФЗФ" Grid.Column="4" FontAttributes="Bold"/>
+                <Label Text="Премія" Grid.Column="5" FontAttributes="Bold"/>
+                <Label Text="{Binding Accrued, StringFormat='{0:F2}'}" Grid.Column="0"/>
+                <Label Text="{Binding Pdfo, StringFormat='{0:F2}'}" Grid.Column="1"/>
+                <Label Text="{Binding Pension, StringFormat='{0:F2}'}" Grid.Column="2"/>
+                <Label Text="{Binding Military, StringFormat='{0:F2}'}" Grid.Column="3"/>
+                <Label Text="{Binding ZfFund, StringFormat='{0:F2}'}" Grid.Column="4"/>
+                <Label Text="{Binding Bonus, StringFormat='{0:F2}'}" Grid.Column="5"/>
+            </Grid>
+            <Label Text="{Binding Received, StringFormat='Отримано: {0:F2} грн'}" FontAttributes="Bold"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+                <Button Text="Зберегти" Command="{Binding SaveCommand}" WidthRequest="100"/>
+                <Button Text="Очистити" Command="{Binding ClearCommand}" WidthRequest="100"/>
+                <Button Text="Відміна" Command="{Binding CancelCommand}" WidthRequest="100"/>
+            </StackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

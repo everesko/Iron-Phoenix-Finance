@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IFF.Views.MainPage"
+             Title="MainPage">
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="20">
+        <Label Text="Залізний Фенікс. Фінанси" FontSize="Large" HorizontalOptions="Center" Margin="0,0,0,20"/>
+        <Button Text="Вхід" WidthRequest="200" Margin="0,0,0,10" Command="{Binding LoginCommand}"/>
+        <Button Text="Реєстрація" WidthRequest="200" Command="{Binding RegisterCommand}"/>
+    </StackLayout>
+</ContentPage>
